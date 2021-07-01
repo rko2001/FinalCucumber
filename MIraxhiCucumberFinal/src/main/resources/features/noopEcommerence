@@ -1,0 +1,49 @@
+Feature: Register and log IN
+  Scenario: Go to main page
+    Given go to 'https://demo.nopcommerce.com/'
+    Then click 'logIn'
+    Then click 'register'
+
+  Scenario: Register User
+    And we type 'name' in the 'firstName' input
+    And we type 'lastname' in the 'lastName' input
+    And we type 'miraxhi22@gmail.com' in the 'email' input
+    And we type 'playground' in the 'password' input
+    And we type 'Lufthansa' in the 'company' input
+    And we fill the date with '1','February','2001' in the dropDowns
+    And we click 'register' button
+    Then check if following text 'Your registration completed' is shown
+         #And we click 'logOut' button
+       ##  | Your registration completed |
+  Scenario: Verify User Credentials
+    Given Go to My Account
+    Given the field 'firstName' has the value 'name'
+    Given the field 'lastName' has the value 'lastname'
+    Given the field 'email' has the value 'miraxhi22@gmail.com'
+    Given the field 'company' has the value 'Lufthansa'
+    Given the date corresponds to '1','February','2001'
+
+  Scenario: Shopping Stimulation
+    Given we hover over 'computers'
+    Then we click 'notebooks' dropdown
+    Then we verify that the current page title is 'nopCommerce demo store. Notebooks'
+    Then we set the pageSize to '9'
+    Given the number of elements is '6'
+    Then we tick the '16GB' option
+    Given the number of elements is '1'
+    Then we tick the '16GB' option
+    Given the number of elements is '6'
+
+  Scenario: Adding elements to shopping card and wishList
+    Given we add the '4' item to shopping card
+    Given Adding '5'-th element to wishList
+
+
+  Scenario: Verify
+    Then verify '1' in card and '1' in wishlisht
+
+  Scenario: Checking shopping card
+    Given we go to shopping card page
+    Given The subtotals and the total match
+    Then  delete '1' elements from the shopping Card
+    Then Quit
